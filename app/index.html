@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.css">
+  <link rel="stylesheet" href="app.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+</head>
+<body>
+<div ng-controller="MainCtrl as vm" ng-cloak="" ng-app="app" layout="column" layout-fill>
+
+  <md-content id="content-scroller">
+    <nav class="navbar navbar-default custom-nav">
+      <ul class=" nav navbar-nav nav-list col-md-10 col-sm-10 col-xs-12 ">
+        <li ng-repeat='item in menuItems'>
+          <div class="account-heading" ng-class="{active : activeMenu === item}">
+            <a href="" ng-click="setActive(item); myFilter = {category: item}">{{ item }}</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <div>
+      <div
+              class="cards-wrap"
+              angular-grid="vm.shots"
+              grid-width="300"
+              gutter-size="12"
+              angular-grid-id="shots"
+              scroll-container="'#content-scroller'"
+              infinite-scroll="vm.loadMoreShots()"
+      >
+        <div class="card" ng-repeat="shot in vm.shots track by $index">
+          <div class="img" style="background-image: url({{::shot.image}});"></div>
+          <div class="inside">
+            <h3>{{::shot.title}}</h3>
+            <h4>{{::shot.category}}</h4>
+            <div class="description" ng-bind-html="::shot.description | unsafe"></div>
+          </div>
+        </div>
+      </div>
+      <div class="loading-more-indicator" ng-show="vm.loadingMore">
+        <md-progress-circular md-mode="indeterminate" md-diameter="64" class="progress-swatch"></md-progress-circular>
+      </div>
+    </div>
+  </md-content>
+
+</div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
+  <script src="https://cdn.rawgit.com/sroze/ngInfiniteScroll/master/build/ng-infinite-scroll.js"></script>
+
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="app.js"></script>
+  <script src="view1/view1.js"></script>
+  <script src="view2/view2.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+</body>
+</html>
